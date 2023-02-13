@@ -2356,7 +2356,7 @@ module.request = function(context, verb, options, entity, callback) {
           res.statusCode >= 300 ||
           (_.isObject(body) && body.Fault && body.Fault.Error && body.Fault.Error.length) ||
           (_.isString(body) && !_.isEmpty(body) && body.indexOf('<') === 0)) {
-        callback(err || body, body, res)
+        callback(err || body, {data: body, response: res}, res)
       } else {
         callback(null, {data: body, response: res }, res)
       }
