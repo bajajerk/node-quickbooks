@@ -2344,6 +2344,7 @@ module.request = function(context, verb, options, entity, callback) {
   if ('production' !== process.env.NODE_ENV && context.debug) {
     debug(request)
   }
+  console.log("LOG REQUEST", request)
   request[verb].call(context, opts, function (err, res, body) {
     if ('production' !== process.env.NODE_ENV && context.debug) {
       console.log('invoking endpoint: ' + url)
