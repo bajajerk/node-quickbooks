@@ -2358,7 +2358,7 @@ module.request = function(context, verb, options, entity, callback) {
           (_.isString(body) && !_.isEmpty(body) && body.indexOf('<') === 0)) {
         callback(err || body, body, res)
       } else {
-        callback(null, body, res)
+        callback(null, {data: body, response: res }, res)
       }
     }
   })
