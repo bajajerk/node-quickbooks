@@ -2523,29 +2523,30 @@ module.query = function(context, entity, criteria) {
 
   return new Promise(function(resolve, reject) {
     module.requestPromise(context, 'get', {url: url}, null).then(function(data) {
-      var fields = Object.keys(data?.QueryResponse || {})
-      var key = _.find(fields, function(k) { return k.toLowerCase() === entity.toLowerCase()})
-      if (fetchAll) {
-        if (data && data.QueryResponse && data.QueryResponse.maxResults === limit) {
-          if (_.isArray(criteria)) {
-            _.each(criteria, function(e) {
-              if (e.field === 'offset') e.value = e.value + limit
-            })
-          } else if (_.isObject(criteria)) {
-            criteria.offset = criteria.offset + limit
-          }
-          return module.query(context, entity, criteria).then(function(more) {
-            data.QueryResponse[key] = data.QueryResponse[key].concat(more.QueryResponse[key] || [])
-            data.QueryResponse.maxResults = data.QueryResponse.maxResults + (more.QueryResponse.maxResults || 0)
-            data.time = more.time || data.time
-            resolve(data)
-          })
-        } else {
-          resolve(data)
-        }
-      } else {
         resolve(data)
-      }
+      // var fields = Object.keys(data.QueryResponse) || []
+      // var key = _.find(fields, function(k) { return k.toLowerCase() === entity.toLowerCase()})
+      // if (fetchAll) {
+      //   if (data && data.QueryResponse && data.QueryResponse.maxResults === limit) {
+      //     if (_.isArray(criteria)) {
+      //       _.each(criteria, function(e) {
+      //         if (e.field === 'offset') e.value = e.value + limit
+      //       })
+      //     } else if (_.isObject(criteria)) {
+      //       criteria.offset = criteria.offset + limit
+      //     }
+      //     return module.query(context, entity, criteria).then(function(more) {
+      //       data.QueryResponse[key] = data.QueryResponse[key].concat(more.QueryResponse[key] || [])
+      //       data.QueryResponse.maxResults = data.QueryResponse.maxResults + (more.QueryResponse.maxResults || 0)
+      //       data.time = more.time || data.time
+      //       resolve(data)
+      //     })
+      //   } else {
+      //     resolve(data)
+      //   }
+      // } else {
+      //   resolve(data)
+      // }
     }).catch(function(err) {
       reject(err)
     })
