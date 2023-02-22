@@ -2523,7 +2523,8 @@ module.query = function(context, entity, criteria) {
 
   return new Promise(function(resolve, reject) {
     module.requestPromise(context, 'get', {url: url}, null).then(function(data) {
-        resolve(data.QueryResponse)
+        console.log("QUERY RESP DATA IS", data)
+        resolve(data)
       // var fields = Object.keys(data.QueryResponse) || []
       // var key = _.find(fields, function(k) { return k.toLowerCase() === entity.toLowerCase()})
       // if (fetchAll) {
