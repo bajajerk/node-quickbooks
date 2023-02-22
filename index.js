@@ -2523,7 +2523,7 @@ module.query = function(context, entity, criteria) {
 
   return new Promise(function(resolve, reject) {
     module.requestPromise(context, 'get', {url: url}, null).then(function(data) {
-      var fields = Object.keys(data.QueryResponse) || []
+      var fields = Object.keys(data?.QueryResponse || {})
       var key = _.find(fields, function(k) { return k.toLowerCase() === entity.toLowerCase()})
       if (fetchAll) {
         if (data && data.QueryResponse && data.QueryResponse.maxResults === limit) {
